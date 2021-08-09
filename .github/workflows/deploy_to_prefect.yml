@@ -22,5 +22,5 @@ jobs:
         env: PREFECT_CLOUD_API_KEY: ${{ secrets.PREFECT_CLOUD_API_KEY }}
         run: |
           prefect backend cloud
-          prefect auth login --key  
-          prefect register --project test -p $PREFECT_CLOUD_API_KEY
+          prefect auth login --key $PREFECT_CLOUD_API_KEY
+          prefect register --project test -p ${{ github.workspace }}
