@@ -2,7 +2,7 @@ name: Deploy to Prefect Cloud
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   deploy_to_prefect:
     runs-on: ubuntu-latest
