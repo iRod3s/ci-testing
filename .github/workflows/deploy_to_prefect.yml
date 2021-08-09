@@ -1,0 +1,25 @@
+name: Deploy to Prefect Cloud
+on: 
+  release:
+    types: [published]
+jobs:
+  deploy_to_prefect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger info
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Set-up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.5
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install prefect
+      - name: Deploy to Prefect Cloud
+        run: |
+          prefect backend cloud
+          prefect auth --key ${{ secrets.PREFECT_CLOUD_API_KEY }}
+          prefect register --project test -p ${{ github.workspace }}
