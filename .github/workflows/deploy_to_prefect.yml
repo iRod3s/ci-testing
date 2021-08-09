@@ -19,7 +19,8 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install prefect
       - name: Deploy to Prefect Cloud
+        env: PREFECT_CLOUD_API_KEY: ${{ secrets.PREFECT_CLOUD_API_KEY }}
         run: |
           prefect backend cloud
-          prefect auth --key ${{ secrets.PREFECT_CLOUD_API_KEY }}
+          prefect auth login --key $PREFECT_CLOUD_API_KEY
           prefect register --project test -p ${{ github.workspace }}
