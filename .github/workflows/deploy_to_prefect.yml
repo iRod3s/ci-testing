@@ -1,7 +1,8 @@
 name: Deploy to Prefect Cloud
-on: 
-  release:
-    types: [published]
+on:
+  push:
+    branches:
+      - master
 jobs:
   deploy_to_prefect:
     runs-on: ubuntu-latest
